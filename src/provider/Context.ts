@@ -1,19 +1,22 @@
-import { createContext } from 'react';
-import type { CreateToastProps, ToastProps } from '../Toast';
+import { createContext, useContext } from 'react';
 
-export type ToastContextProps = {
-  queue: ToastProps[];
-  show: (newToast: CreateToastProps) => string;
-  hide: (id?: string) => void;
-  pause: (id?: string) => void;
-  unpause: (id?: string) => void;
+export type Toast = {
+  id: string;
+  // Timeout for displaying.
+  timeout?: number;
+
+  // Render toast component.
+  onRender?: () => void;
+
+  // Toast methods.
+  onShow?: () => void;
+  onHide?: () => void;
+  onPause?: () => void;
+  onUnpause?: () => void;
 };
 
-const defaultValues: ToastContextProps = {
-  queue: [],
-  show: () => '',
-  hide: () => {},
-  pause: () => {},
-  unpause: () => {},
-};
-export const ToastContext = createContext<ToastContextProps>(defaultValues);
+export type ToastContextType = Toast[] | null;
+export const ToastContext = createContext<ToastContextType>(null);
+export const ToastsDispatchContext = createContext(null);
+
+export const useToastContext = (): ToastContextType => useContext(ToastContext);

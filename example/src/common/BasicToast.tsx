@@ -1,12 +1,9 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { AppButton } from './AppButton';
-import { ToastOptions } from '../../../src/Toast';
+import { ToastOptions } from '../../../src/ToastComponent';
 
-export const BasicToast = (props: {
-  message: string;
-  options: ToastOptions;
-}) => {
+export const BasicToast = (props: { message: string; options: ToastOptions }) => {
   return (
     <View style={OwnStyles.toast}>
       <Text style={OwnStyles.message}>{props.message}</Text>

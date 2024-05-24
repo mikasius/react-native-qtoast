@@ -1,67 +1,45 @@
 import React, { useMemo, useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { AppButton } from './common/AppButton';
-import { showToast as showToastFromHelper } from './showToastHelper';
-import { BasicToast } from './common/BasicToast';
-import { ToastOptions } from '../../src/Toast';
-import { useToast } from '../../src/provider/useToast';
+import { useToastContext } from '../../src/provider/Context';
 
 export const RootComponent = () => {
-  const {
-    hide: hideToasts,
-    pause: pauseToasts,
-    unpause: unpauseToasts,
-  } = useToast();
-  const [index, setIndex] = useState<number>(0);
+  const toasts = useToastContext();
 
-  const showToastOnPress = (message: string, timeout?: number) => {
-    showToastFromHelper({
-      renderToast: (options: ToastOptions) => (
-        <BasicToast message={message} options={options} />
-      ),
-      timeout: timeout,
-    });
-  };
+  const [index, setIndex] = useState<number>(0);
 
   const buttons: { message: string; onPress: () => void }[] = useMemo(
     () => [
       {
-        onPress: () => {
-          showToastOnPress(`Message toast number ${index}`, 5000);
-          setIndex((x) => x + 1);
-        },
+        onPress: () => {},
         message: 'Show toast',
       },
       {
-        onPress: () => {
-          showToastOnPress(`I'm permanent`);
-        },
+        onPress: () => {},
         message: 'Show permanent toast',
       },
       {
-        onPress: () => pauseToasts(),
+        onPress: () => {},
         message: 'Pause all toasts',
       },
       {
-        onPress: () => unpauseToasts(),
+        onPress: () => {},
         message: 'Unpause all toasts',
       },
       {
-        onPress: () => hideToasts(),
+        onPress: () => {},
         message: 'Clear queue',
       },
     ],
-    [hideToasts, index, pauseToasts, unpauseToasts]
+    []
   );
 
   return (
-    <>
-      <View style={OwnStyles.appContainer}>
-        {buttons.map((button) => (
-          <StyledAppButton {...button} key={button.message} />
-        ))}
-      </View>
-    </>
+    <View style={OwnStyles.appContainer}>
+      {buttons.map((button) => (
+        <StyledAppButton {...button} key={button.message} />
+      ))}
+    </View>
   );
 };
 

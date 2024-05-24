@@ -1,3 +1,2 @@
-export { Toast, ToastProps, CreateToastProps, ToastOptions } from './Toast';
+export { ToastComponent } from './ToastComponent';
 export { ToastProvider, ToastAccessor } from './provider/Provider';
-export { useToast } from './provider/useToast';

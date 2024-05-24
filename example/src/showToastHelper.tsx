@@ -1,5 +1,4 @@
-import { CreateToastProps } from '../../src/Toast';
-import { ToastAccessor } from '../../src/provider/Provider';
+// import { ToastAccessor } from '../../src/provider/Provider';
+// import { Toast } from '../../src/provider/Context';
 
-export const showToast = (toast: CreateToastProps) =>
-  ToastAccessor.show({ ...toast, animated: true });
+// export const showToast = (toast: Toast) => ToastAccessor.onShow({ ...toast, animated: true });
