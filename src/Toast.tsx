@@ -1,6 +1,6 @@
 import React, { useEffect, type FC, useRef, useCallback } from 'react';
 import { View } from 'react-native';
-import { useToast } from './provider/useToast';
+import { useToastContext } from './provider/useToastContext';
 
 export type ToastOptions = {
   id: string;
@@ -24,7 +24,7 @@ export type CreateToastProps = CommonToastProps & {
 };
 
 export const Toast: FC<ToastProps> = props => {
-  const { hide } = useToast();
+  const { hide } = useToastContext();
   const timeoutEnd = useRef<number | null>(null);
   const remainingTimeout = useRef<typeof props.timeout>(props.timeout);
   const timer = useRef<ReturnType<typeof setTimeout> | null>(null);

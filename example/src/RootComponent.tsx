@@ -4,10 +4,10 @@ import { AppButton } from './common/AppButton';
 import { showToast as showToastFromHelper } from './showToastHelper';
 import { BasicToast } from './common/BasicToast';
 import { ToastOptions } from '../../src/Toast';
-import { useToast } from '../../src/provider/useToast';
+import { useToastContext } from '../../src/provider/useToastContext';
 
 export const RootComponent = () => {
-  const { hide: hideToasts, pause: pauseToasts, unpause: unpauseToasts } = useToast();
+  const { hide: hideToasts, pause: pauseToasts, unpause: unpauseToasts } = useToastContext();
   const [index, setIndex] = useState<number>(0);
 
   const showToastOnPress = (message: string, timeout?: number) => {

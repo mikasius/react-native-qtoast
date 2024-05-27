@@ -28,6 +28,7 @@ export let ToastAccessor: ToastContextProps;
 export const ToastProvider = (props: ToastProviderProps) => {
   const [queue, setQueue] = useState<ToastProps[]>([]);
   const [shownToasts, setShownToasts] = useState<ToastProps[]>([]);
+
   const providerRef = useRef<ToastContextProps>();
   const shownToastsRef = useRef(shownToasts);
 
@@ -40,7 +41,7 @@ export const ToastProvider = (props: ToastProviderProps) => {
     if (id === undefined) {
       await Promise.all(toasts.map(async toast => await toast.onHide?.()));
     } else {
-      await toasts.find(x => x.id === id)?.onHide?.();
+      await toasts.find(toast => toast.id === id)?.onHide?.();
     }
 
     setQueue(current => (id === undefined ? [] : current.filter(toast => toast.id !== id)));
@@ -117,6 +118,7 @@ export const ToastProvider = (props: ToastProviderProps) => {
           ))}
         </View>
       </View>
+
       {props.children}
     </ToastContext.Provider>
   );
